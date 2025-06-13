@@ -2,13 +2,12 @@ import { IProducts } from "@/interfaces/IProducts"
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL
 
-export const getProducts = async(): Promise<IProducts[]> => {
-    const response = await fetch(`${API_URL}/products`, {
-        next: {revalidate: 1200}
-    })
-    const products = await response.json()
-    return products;
-}
+export const getProducts = async (): Promise<IProducts[]> => {
+  const res = await fetch(`${API_URL}/products`);
+  const json = await res.json();
+  return json.data; // <-- así solo devolvés el array
+};
+
 
 export const getProductById = async (id: string): Promise<IProducts> =>{
     const response = await getProducts();

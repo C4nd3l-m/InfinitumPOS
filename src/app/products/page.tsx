@@ -1,21 +1,22 @@
-import { getProducts } from "@/actions/getProducts"
+import { getProducts } from "@/actions/getProducts";
 
-const Products = async () => {
-    try {
-        const products = await getProducts();
-        {
-            products.map
-        }
-    }
-    catch {
-        return <div> Error</div>
-    }
-    return (
-        <>
-            <div>
-            </div>
-        </>
-    )
-}
+const Products: React.FC = async () => {
+  const products = await getProducts();
+  console.log(products)
 
-export default Products
+  return (
+    <div>
+      {products.map((product) => (
+        <div key={product.id}>
+          <h3>{product.name}</h3>
+          <p>Precio costo: {product.costPrice}</p>
+          <p>Precio en efectivo: {product.priceCash}</p>
+          <p>Precio con tarjeta: {product.priceCard}</p>
+          <button>Editar producto</button>
+        </div>
+      ))}
+    </div>
+  );
+};
+
+export default Products;
